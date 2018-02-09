@@ -1,0 +1,334 @@
+# Declares user's starting health.
+user_health = 50
+
+# Declares enemy's starting health.
+enemy_health = 50
+
+weapon_stats = 10
+
+global has_weapon
+
+
+import random
+
+if continue_on == 2:
+    # Opening sequence of the game, states objective.
+    def start():
+        global user_health
+        global enemy_health
+        user_health = 50
+        enemy_health = 50
+        print "You walk over to the toaster to toast the bread."
+        print "Suddenly, something jumps out of the toaster."
+        print "You need to kill it before toasting the bread!"
+        print ""
+        user_action()
+        
+    # The "end screen" which rewards the user with toasted bread.
+    def end():
+        print ""
+        print "Finally you can toast your bread."
+        print "You have received: toasted bread."
+        
+    # Gives user a list of commands to choose from and allows them to decide what their next move is.
+    def user_action():
+        print "List of commands:"
+        print "Fight"
+        print "Check stats"
+        print "Run"
+        print ""
+        while True:
+            user_choice = input("What will you do? ") 
+            if "fight" in user_choice or "Fight" in user_choice:
+                fight()
+                break
+            elif "choose weapon" in user_choice:
+                choose_weapon()
+                break
+            elif "run" in user_choice or "Run" in user_choice:
+                run()
+                break
+            elif "check stats" in user_choice or "Check stats" in user_choice:
+                status()
+            else:
+                print "That is not a valid command."
+                print "Please choose a command from the list."
+                continue
+    
+    # Allows user to check their health and gives them the option to potentially heal themselves if their health is below 20.    
+    def status():
+        global user_health
+        print "Your health is " + str(user_health) + "/50"
+        if user_health >= 35:
+            print "You seem fine, go back to fighting!"
+        elif user_health >= 25:
+            print "You look pretty beat up, but go back to fighting!"
+        elif user_health <= 20:
+            print "Yikes, you're in rough shape. Have a drink."
+            drink_choice = input("Will you take the drink? ")
+            if "yes" in drink_choice or "Yes" in drink_choice:
+                dice_roll = random.randint(1, 2)
+                if dice_roll == 1:
+                    print "The drink was poisoned! You have died."
+                    print "Starting over..."
+                    print ""
+                    start()
+                else:
+                    user_health = user_health + 20
+                    print "The drink has healed you!"
+                    print "Your health is now " + str(user_health) + "/50."
+                    print ""
+                    user_action()
+    
+    # Forces the user to fight if they choose to run away from the start.   
+    def run():
+        print "You chose to run away."
+        print "But the thing runs after you."
+        print "It's a spider! It jumps out at you!"
+        print "You are forced to fight."
+        fight()                
+      
+    # User fights the enemy, if they win it brings up the end screen and if they lose the game restarts.     
+    def fight():
+        global user_health
+        global enemy_health
+        print "A spider jumps out at you!"
+        print "Spider's health: " + str(enemy_health) + "/50"
+        print "Your health: " + str(user_health) + "/50"
+        print ""
+        global has_weapon
+        while enemy_health > 0:
+            fight_or_run = input("Fight or run? ")
+            if "fight" in fight_or_run or "Fight" in fight_or_run:
+                if has_weapon == True:
+                    global weapon_stats
+                    print "You attacked the spider for " + str(weapon_stats) + " damage."
+                    enemy_health = enemy_health - weapon_stats
+                else:
+                    user_damage = random.randint(1, 10)
+                    print "You attacked the spider for " + str(weapon_stats) + " damage."
+                    enemy_health = enemy_health - user_damage
+                enemy_damage = random.randint(1, 10)
+                print "The spider attacks back for " + str(enemy_damage) + " damage!"
+                user_health = user_health - enemy_damage
+                
+                if user_health <= 0:
+                    print "You have died!"
+                    print "You've been given another chance to fight."
+                    start_over = input("Start over? ")
+                    if "yes" in start_over or "Yes" in start_over:
+                        print "Starting over..."
+                        print ""
+                        start()
+                    else:
+                        print "You're gonna have to start over anyway."
+                        print ""
+                        start()
+                    break
+            elif "run" in fight_or_run or "Run" in fight_or_run:
+                print "You have run away!"
+                print ""
+                user_action()
+            else:
+                print "That is not a valid command."
+        print "You have defeated the spider!"
+        end()
+
+    def turn_left():
+        print "---------------------------------------------------------------"
+        print "There are three drawers."
+        user_number = input("Which will you open? 1, 2, or 3? ")
+        if "1" in user_number:
+            print "---------------------------------------------------------------"
+            print "That drawer is locked. Probably nothing good in there anyway."
+            open_drawer = input("Would you like to open the other drawers? ")
+            if "yes" in open_drawer:
+                user_number = input("Which will you open? 2 or 3? ")
+                if "2" in user_number:
+                    print "---------------------------------------------------------------"
+                    print "You found a knife!"
+                    print "But you don't have any pockets."
+                    print "You decide to take it anyway and just hold it."
+                    global has_weapon
+                    has_weapon = True
+                elif "3" in user_number:
+                    print "This drawer is locked."
+                open_drawer = input("Would you like to open the last drawer? ")
+                if "yes" in open_drawer:
+                    print "---------------------------------------------------------------"
+                    print "This drawer is locked."
+                    print "There's nothing else to see here."
+                    print "---------------------------------------------------------------"
+                    user_direction = input("Will you turn right? ")
+                    if "yes" in user_direction:
+                        turn_right()
+                    else:
+                        start()
+                else:
+                    user_direction = input("Will you turn right? ")
+                    if "yes" in user_direction:
+                        turn_right()
+                    else:
+                        start()
+            else:
+                user_direction = input("Will you turn right? ")
+                if "yes" in user_direction:
+                    turn_right()
+                else:
+                    start()
+        elif "2" in user_number:
+            print "---------------------------------------------------------------"
+            print "You have found a knife!"
+            print "But you don't have any pockets."
+            print "There's no real point in having this knife but you decide to take it anyway."
+            has_weapon = True
+            open_drawer = input("Would you like to open the other drawers? ")
+            if "yes" in open_drawer:
+                user_number = input("Which will you open? 1 or 3? ")
+                if "1" in user_number:
+                    print "---------------------------------------------------------------"
+                    print "This drawer is locked. Probably nothing good in there anyway."
+                elif "3" in user_number:
+                    print "This drawer is locked."
+                open_drawer = input("Would you like to open the last drawer? ")
+                if "yes" in open_drawer:
+                    print "---------------------------------------------------------------"
+                    print "This drawer is locked."
+                    print "There's nothing else to see here."
+                    print "---------------------------------------------------------------"
+                    user_direction = input("Will you turn right? ")
+                    if "yes" in user_direction:
+                        turn_right()
+                    else:
+                        start()
+                else:
+                    user_direction = input("Will you turn right? ")
+                    if "yes" in user_direction:
+                        turn_right()
+                    else:
+                        start()
+            else:
+                user_direction = input("Will you turn right? ")
+                if "yes" in user_direction:
+                    turn_right()
+                else:
+                    start()
+        elif "3" in user_number:
+            print "---------------------------------------------------------------"
+            print "This drawer is locked."
+            open_drawer = input("Would you like to open the other drawers? ")
+            if "yes" in open_drawer:
+                user_number = input("Which will you open? 1 or 2? ")
+                if "1" in user_number:
+                    print "---------------------------------------------------------------"
+                    print "This drawer is locked. Probably nothing good in there anyway."
+                elif "2" in user_number:
+                    print "---------------------------------------------------------------"
+                    print "You have found a knife!"
+                    print "But you don't have any pockets."
+                    print "There's no real point in having this knife but you decide to take it anyway."
+                    has_weapon = True
+                open_drawer = input("Would you like to open the last drawer? ")
+                if "yes" in open_drawer:
+                    print "---------------------------------------------------------------"
+                    print "You have found a knife!"
+                    print "But you don't have any pockets."
+                    print "There's no real point in having this knife but you decide to take it anyway."
+                    has_weapon = True
+                    print "There's nothing else to see here."
+                    print "---------------------------------------------------------------"
+                    user_direction = input("Will you turn right? ")
+                    if "yes" in user_direction:
+                        turn_right()
+                    else:
+                        start()
+                else:
+                    user_direction = input("Will you turn right? ")
+                    if "yes" in user_direction:
+                        turn_right()
+                    else:
+                        start()
+            else:
+                user_direction = input("Will you turn right? ")
+                if "yes" in user_direction:
+                    turn_right()
+                else:
+                    start()
+
+    def turn_right():
+        print "---------------------------------------------------------------"
+        print "You're now facing the counter."
+        print "There are three mystery drinks..."
+        take_drink = input("Will you take a drink? ")
+        if "yes" in take_drink:
+            drink_number = input("Which drink will you take? 1, 2 or 3? ")
+            if "1" in drink_number:
+                has_weapon = False
+                print "The drink makes you lightheaded."
+                print "You fall over and drop the knife. It slides under the counter."
+                print "You have lost your knife!"
+                has_weapon = False
+                print "There's nothing else to see here."
+                print "---------------------------------------------------------------"
+                user_direction = input("Will you turn left? ")
+                if "yes" in user_direction:
+                    turn_left()
+                else:
+                    start()
+            elif "2" in drink_number:
+                global user_health
+                user_health = user_health + 20
+                print "You have gained 20 health points!"
+                print "Your health is now " + str(user_health) + "/50"
+                print "There's nothing else to see here."
+                print "---------------------------------------------------------------"
+                user_direction = input("Will you turn left? ")
+                if "yes" in user_direction:
+                    turn_left()   
+                else:
+                    start()
+            elif "3" in drink_number:
+                user_health = user_health - 20
+                print "The drink has poisoned you."
+                print "You've lost 20 health points!"
+                print "Your health is now " + user_health + "/50"
+                print "There's nothing else to see here."
+                print "---------------------------------------------------------------"
+                user_direction = input("Will you turn left? ")
+                if "yes" in user_direction:
+                    turn_left()
+                else:
+                    start()
+        else:
+            user_direction = input("Will you turn left? ")
+            if "yes" in user_direction:
+                turn_left()   
+            else:
+                print ""
+                start()
+    
+    # Beginning.
+    print "Almost ready to make a sandwich... but you still need bread."
+    print "The bread should be here somewhere..."
+    user_direction = input("Turn left or turn right? ")
+    
+    while True:
+        if "left" in user_direction:
+            turn_left()
+            break
+        elif "right" in user_direction:
+            turn_right()
+            break
+        else:
+            print "That is not a valid command."
+            user_direction = input("Turn left or turn right? ")
+            continue
+
+
+
+
+
+
+
+
+
