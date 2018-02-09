@@ -1,0 +1,34 @@
+win = 0
+person = input('enter your name; ')
+print('welcom back',person)
+answer = input ("want to play a trivia? ")
+
+if continue_on == 3:
+while win == 0 : 
+    print
+    if answer == 'yes':
+        guess_1 = input ("is tomato a fruit: ")
+        if guess_1 == "yes" : 
+            print "correct!"
+            guess_2 = input ("what is a baby cow called: ")
+            if guess_2 == "calf":
+                print "correct!"
+                guess_3 = input ("what is the tallest animal: ")
+                if guess_3 ==  "giraffe":
+                    print "correct!"
+                    guess_4 = input ("what has the fastes heart rate: ")
+                    if guess_4 == "shrew":
+                        print "you have received two pieces of sliced bread !"
+                        win = win + 1
+                        continue_on = 4
+                    else:
+                        print "wrong"
+                else: 
+                    print "wrong"
+            else:
+                print "wrong"
+        else: 
+            print "Wrong try again"
+    else:
+        print 
+
