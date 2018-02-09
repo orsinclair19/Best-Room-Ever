@@ -1,0 +1,89 @@
+print "You've entered the kitchen."
+print "You're feeling kind of hungry, maybe you should make a sandwich..."
+print "You head over to the back of the room and set your ingredients down on the counter."
+print "First thing's first:"
+print
+
+continue_on = 1
+ingredient_2 = "cheese"
+count = 0
+win = 0
+if continue_on == 1 :
+    while win == 0 :
+        print "You have to slice up the " + ingredient_2 + " and add it to the sandwich."
+        print "You have to make sure not to cut your hand though."
+        print "Be super percise with your cut!"
+        print
+        print
+        print "Your objective is to guess the secret number in 5 guesses or less."
+        print "If you succeed you will slice the " + ingredient_2 + " perfectly!"
+        print
+        print
+
+        import random
+        pick_num1 = random.randint(0, 100)
+        pick_num2 = random.randint(0, 100)
+
+        if pick_num1 == pick_num2 + 1 :
+            print "You win because the number would be a decimal! The numbers were " + str(pick_num2) + " and " + str(pick_num1) + ". Answer " + str(pick_num2) + " or " + str(pick_num1) + " to continue." 
+            win = 1
+        elif pick_num1 + 1 == pick_num2 :
+            print "You win because the number would be a decimal! The numbers were " + str(pick_num1) + " and " + str(pick_num2) + ". Answer " + str(pick_num1) + " or " + str(pick_num2) + " to continue."
+            win = 1
+        elif pick_num1 > pick_num2 : 
+            print "The number is between " + str(pick_num2) + " and " + str(pick_num1)
+        elif pick_num1 < pick_num2 :
+            print "The number is between " + str(pick_num1) + " and " + str(pick_num2)
+        elif pick_num1 == pick_num2 :
+            print "You win because the computer picked " + str(pick_num1) + " and " + str(pick_num2) + ". Answer " + str(pick_num1) + " to continue."
+            win = 1
+        else :
+            print "This message should never appear"
+    
+        if pick_num1 > pick_num2 :
+            y = int(pick_num1) 
+            x = int(pick_num2) 
+        elif pick_num1 < pick_num2 :
+            x = int(pick_num1) 
+            y = int(pick_num2)
+        elif pick_num1 == pick_num2 :
+            x = int(pick_num1) 
+            y = int(pick_num2)
+            
+        secret_num = random.randint(x, y)
+
+        count = 1
+
+        guess = int(input("What number do you think will give you your ingredient? : "))
+        while guess != secret_num :
+            if guess > secret_num :
+                print "Too high!"
+                guess = int(input("Choose another number : "))
+                count = count + 1
+            elif guess < secret_num :
+                print "Too low!"
+                guess = int(input("Choose another number : "))
+                count = count + 1
+        
+        print "That's the perfect slice!"        
+            
+        if count <= 5 :
+            print "It took you " + str(count) + " guesses to guess the number!"
+            print "You sliced the " + ingredient_2 + "."
+            win = win + 1
+        else :
+            print "But...." 
+            print "You also sliced off your hand. :-("
+            print 
+            print
+            print "*****************************************************************************"
+            print
+            print
+    # Get this to repeat the program again 
+    
+        
+end = input("Enter the word 'done' to continue to the next ingredient! : ")
+if end == "done" or "Done" or "done" :
+    continue_on = 2
+    
+
