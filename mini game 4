@@ -1,0 +1,186 @@
+win = 0 
+if continue_on == 4 :
+    
+    import random
+        
+    random_words = ["function", "booleans", "variable", "operater", "commands"]
+    
+    function = "function"
+    booleans = "booleans"
+    variable = "variable"
+    operater = "operater"
+    commands = "commands"
+    
+    scrambled_1 = (random.choice(random_words))           
+    random_words.remove(scrambled_1)
+    length = len(scrambled_1)
+    print scrambled_1 
+    print length 
+    # choose random letters
+    letter = [0, 1, 2, 3, 4, 5, 6, 7]
+    l_1 = random.choice(letter)
+    letter.remove(l_1)
+       
+    l_2 = random.choice(letter)
+    letter.remove(l_2)
+       
+    l_3 = random.choice(letter)
+    letter.remove(l_3)
+           
+    l_4 = random.choice(letter)
+    letter.remove(l_4)
+           
+    l_5 = random.choice(letter)
+    letter.remove(l_5)
+           
+    l_6 = random.choice(letter)
+    letter.remove(l_6)
+        
+    l_7 = random.choice(letter)
+    letter.remove(l_7)
+            
+    l_8 = random.choice(letter)
+    letter.remove(l_8)
+            
+    print scrambled_1[l_1], scrambled_1[l_2], scrambled_1[l_3], scrambled_1[l_4], scrambled_1[l_5], scrambled_1[l_6], scrambled_1[l_7], scrambled_1[l_8] 
+        
+    print "Unscramble the words to make your sandwich."
+    # print "You only have 300 seconds to guess the right word!"
+    print "If you don't guess the word quickly then your sandwich will spoil"
+    print "Hurry up!"
+             
+     
+            # timer
+        # import time 
+        # def countdown(timer) :
+        #     while timer > 0 :
+        #         timer = timer - 1
+        #         if timer == 150 :
+        #           print "150 seconds remaining!"
+        #         if timer == 60 :
+        #             print "60 seconds left!!!"
+        #         if timer == 30 :
+        #             print "Only 30 seconds left now! Hurry up!"
+        #         if timer == 10 :
+        #             print "10..."
+        #         if timer == 9 :
+        #             print "9..."
+        #         if timer == 8 :
+        #             print "8..."
+        #         if timer == 7 :
+        #             print "7..."
+        #         if timer == 6 :
+        #             print "6..."
+        #         if timer == 5 :
+        #             print "5..."
+        #         if timer == 4 :
+        #             print "4..."
+        #         if timer == 3 :
+        #             print "3..."
+        #         if timer == 2 :
+        #             print "2..."
+        #         if timer == 1 :
+        #             print "1..."
+        #         if timer == 0 :
+        #             print "Your time is up!"
+                    
+        # countdown(300)
+            
+    guess = input("What is your guess? " )
+    while guess != function or booleans or variable or command or operater :
+        guess = input("Sorry that's wrong. Guess again: ")
+    if guess == function :
+        win = 1
+        print "That's right!"
+            
+    if win == 1 :
+        scrambled_2 = (random.choice(random_words))
+        random_words.remove(scrambled_2)
+        print scrambled_2 
+        # choose random letters
+        letter = [0, 1, 2, 3, 4, 5, 6, 7]
+        l_1 = random.choice(letter)
+        letter.remove(l_1)
+           
+        l_2 = random.choice(letter)
+        letter.remove(l_2)
+           
+        l_3 = random.choice(letter)
+        letter.remove(l_3)
+           
+        l_4 = random.choice(letter)
+        letter.remove(l_4)
+           
+        l_5 = random.choice(letter)
+        letter.remove(l_5)
+           
+        l_6 = random.choice(letter)
+        letter.remove(l_6)
+            
+        l_7 = random.choice(letter)
+        letter.remove(l_7)
+            
+        l_8 = random.choice(letter)
+        letter.remove(l_8)
+            
+        print scrambled_2[l_1], scrambled_2[l_2], scrambled_2[l_3], scrambled_2[l_4], scrambled_2[l_5], scrambled_2[l_6], scrambled_2[l_7], scrambled_2[l_8]
+            
+        guess = input("What is your guess? " )
+        if guess != function or booleans or variable or command or operater :
+            guess = input("Sorry that's wrong. Guess again: ")
+        else :
+            win = 1
+            print "That's right!"
+    
+                
+    if win == 2 :
+        scrambled_2 = (random.choice(random_words))
+        random_words.remove(scrambled_2)
+        print scrambled_2 
+        # choose random letters
+        letter = [0, 1, 2, 3, 4, 5, 6, 7]
+        l_1 = random.choice(letter)
+        letter.remove(l_1)
+           
+        l_2 = random.choice(letter)
+        letter.remove(l_2)
+           
+        l_3 = random.choice(letter)
+        letter.remove(l_3)
+           
+        l_4 = random.choice(letter)
+        letter.remove(l_4)
+           
+        l_5 = random.choice(letter)
+        letter.remove(l_5)
+           
+        l_6 = random.choice(letter)
+        letter.remove(l_6)
+            
+        l_7 = random.choice(letter)
+        letter.remove(l_7)
+            
+        l_8 = random.choice(letter)
+        letter.remove(l_8)
+            
+        print scrambled_2[l_1], scrambled_2[l_2], scrambled_2[l_3], scrambled_2[l_4], scrambled_2[l_5], scrambled_2[l_6], scrambled_2[l_7], scrambled_2[l_8]
+            
+        guess = input("What is your guess? " )
+        
+        if guess != function or booleans or variable or commands or operater :
+            guess = input("Sorry that's wrong. Guess again: ")
+        else :
+            win = 1
+            print "That's right!"
+        
+    if win == 3 :
+        print "Wooo!"
+        print "You made your snadwich super fast."
+        print "Now you can enjoy your snack and continue to the next room."
+        x = int(input("Type '1' to continue. "))
+        while x != 1 :
+            print "Please try again."
+            x = int(input("Type '1' to continue. "))
+        if x == 1 :
+            continue_on = 4
+            
